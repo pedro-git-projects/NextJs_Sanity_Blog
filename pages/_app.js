@@ -1,6 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'styles/index.scss';
 import 'highlight.js/styles/dracula.css';
+import ThemeProvider from 'providers/ThemeProvider';
 
 import { library, config } from '@fortawesome/fontawesome-svg-core';
 import {
@@ -15,8 +16,7 @@ library.add(faList, faBorderAll, faSortNumericDown, faSortNumericUp);
 
 import '@fortawesome/fontawesome-svg-core/styles.css';
 
-function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
-}
-
-export default MyApp
+export default ({Component, pageProps}) =>
+  <ThemeProvider>
+    <Component {...pageProps} />
+  </ThemeProvider>
