@@ -16,7 +16,7 @@ export default function BlogHeader({title, subtitle, coverImage, date, author}) 
         { coverImage &&
           <img
             className="img-fluid rounded"
-            src={coverImage} alt="TODO: provide alt"/>
+            src={coverImage} alt="banner"/>
         }
       </div>
     )

@@ -4,7 +4,7 @@ import PageLayout from 'components/PageLayout';
 import AuthorIntro from 'components/AuthorIntro';
 import FilteringMenu from 'components/FilteringMenu';
 import { useGetBlogsPages } from 'actions/pagination';
-import { getAllBlogs } from 'lib/api';
+import { getPaginatedBlogs } from 'lib/api';
 
 
 
@@ -50,7 +50,7 @@ export default function Home({blogs}) {
 }
 
 export async function getStaticProps() { 
-  const blogs = await getAllBlogs({offset: 0, date: 'desc'});
+  const blogs = await getPaginatedBlogs({offset: 0, date: 'desc'});
   return {
     props: {
       blogs
