@@ -3,20 +3,23 @@ import PageLayout from 'components/PageLayout';
 import AuthorIntro from 'components/AuthorIntro';
 import CardItem from 'components/CardItem';
 import CardListItem from 'components/CardListItem';
+
 import { getAllBlogs } from 'lib/api';
+import {useGetHello} from 'actions'
 import { useState } from 'react';
 import FilteringMenu from 'components/FilteringMenu';
-import useSWR from 'swr'
 
-const fetcher = url => fetch(url).then(res => res.json())
 
 export default function Home({blogs}) {  
   const [filter, setFilter] = useState({
     view: { list: 0 }
   });
 
-  const { data, error } = useSWR('/api/hello', fetcher);
-  debugger
+  
+  const { data, error } = useGetHello();
+  if (data){
+    alert(JSON.stringify(data))
+  }
 
 
   return (
