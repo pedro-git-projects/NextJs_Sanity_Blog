@@ -3,21 +3,39 @@ import PageLayout from 'components/PageLayout';
 import AuthorIntro from 'components/AuthorIntro';
 import CardItem from 'components/CardItem';
 import CardListItem from 'components/CardListItem';
+import { getAllBlogs } from 'lib/api';
 
 
-export default function Home(){
+
+export default function Home({blogs}) {
+  console.log('Hello World');  
   return (
     <PageLayout>
     <AuthorIntro />
-    <hr/>
+    <hr/>    
     <Row className="mb-5">
       <Col md="10">
         <CardListItem />
       </Col>
-      <Col md="4">
-        <CardItem />
-      </Col>
+      {blogs.map(blog => <Col md="4">
+        <CardItem 
+         title={blog.title}
+         subtitle={blog.subtitle}
+         date={blog.date}
+         image={blog.coverImage}
+        />
+      </Col> )}
+     
     </Row>
   </PageLayout>
   )
+}
+
+export async function getStaticProps() { 
+  const blogs = await getAllBlogs();
+  return {
+    props: {
+      blogs
+    }
+  }
 }
