@@ -5,7 +5,7 @@ import CardItem from 'components/CardItem';
 import CardListItem from 'components/CardListItem';
 
 import { getAllBlogs } from 'lib/api';
-import {useGetHello} from 'actions'
+import {useGetBlogs} from 'actions'
 import { useState } from 'react';
 import FilteringMenu from 'components/FilteringMenu';
 
@@ -16,7 +16,7 @@ export default function Home({blogs}) {
   });
 
   
-  const { data, error } = useGetHello();
+  const { data, error } = useGetBlogs();
   if (data){
     alert(JSON.stringify(data))
   }
