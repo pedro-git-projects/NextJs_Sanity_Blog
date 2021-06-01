@@ -6,12 +6,19 @@ import CardListItem from 'components/CardListItem';
 import { getAllBlogs } from 'lib/api';
 import { useState } from 'react';
 import FilteringMenu from 'components/FilteringMenu';
+import useSWR from 'swr'
 
+const fetcher = url => fetch(url).then(res => res.json())
 
 export default function Home({blogs}) {  
   const [filter, setFilter] = useState({
     view: { list: 0 }
   });
+
+  const { data, error } = useSWR('/api/hello', fetcher);
+  debugger
+
+
   return (
     <PageLayout>
       <AuthorIntro />
