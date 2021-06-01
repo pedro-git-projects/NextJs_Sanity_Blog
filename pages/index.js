@@ -14,8 +14,7 @@ export default function Home({blogs}) {
     <AuthorIntro />
     <hr/>    
     <Row className="mb-5">
-      <Col md="10">
-        <CardListItem />
+      <Col md="10">        
       </Col>
       {blogs.map(blog => <Col md="4">
         <CardItem 
@@ -24,6 +23,10 @@ export default function Home({blogs}) {
          subtitle={blog.subtitle}
          date={blog.date}
          image={blog.coverImage}
+         link={{
+          href: '/blogs/[slug]',
+          as: `/blogs/${blog.slug}`
+        }}
         />
       </Col> )}
      
