@@ -4,6 +4,7 @@ import BlogHeader from 'components/BlogHeader';
 import { Row, Col } from 'react-bootstrap'
 import BlogContent from 'components/BlogContent';
 import { urlFor } from 'lib/api';
+import moment from 'moment';
 
 const BlogDetail = ({blog}) => {
   return (
@@ -15,10 +16,12 @@ const BlogDetail = ({blog}) => {
           subtitle={blog.subtitle}
           coverImage={urlFor(blog.coverImage).height(600).url()}
           author={blog.author}
-          date={blog.date}
+          date={moment(blog.date).format('LLL')}
         />
         <hr/>
-        <BlogContent content={blog.content} />
+        { blog.content &&
+            <BlogContent content={blog.content} />
+          }
       </Col>
     </Row>
     </PageLayout>
