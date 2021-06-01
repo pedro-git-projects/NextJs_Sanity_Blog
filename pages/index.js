@@ -7,8 +7,7 @@ import { getAllBlogs } from 'lib/api';
 
 
 
-export default function Home({blogs}) {
-  console.log('Hello World');  
+export default function Home({blogs}) {  
   return (
     <PageLayout>
     <AuthorIntro />
