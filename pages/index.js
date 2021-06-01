@@ -4,32 +4,51 @@ import AuthorIntro from 'components/AuthorIntro';
 import CardItem from 'components/CardItem';
 import CardListItem from 'components/CardListItem';
 import { getAllBlogs } from 'lib/api';
-
+import { useState } from 'react';
+import FilteringMenu from 'components/FilteringMenu';
 
 
 export default function Home({blogs}) {  
+  const [filter, setFilter] = useState({
+    view: { list: 0 }
+  });
   return (
     <PageLayout>
-    <AuthorIntro />
-    <hr/>    
-    <Row className="mb-5">
-      <Col md="10">        
-      </Col>
-      {blogs.map(blog => <Col md="4">
-        <CardItem 
-        author={blog.author}
-         title={blog.title}
-         subtitle={blog.subtitle}
-         date={blog.date}
-         image={blog.coverImage}
-         link={{
-          href: '/blogs/[slug]',
-          as: `/blogs/${blog.slug}`
+      <AuthorIntro />
+      <FilteringMenu
+                filter={filter}
+                onChange={(option, value) => {
+                  debugger
+                  setFilter({...filter, [option]: value});
         }}
-        />
-      </Col> )}
-     
-    </Row>
+      />
+      <hr/>
+      <Row className="mb-5">
+        {/* <Col md="10">
+          <CardListItem />
+        </Col> */}
+        { blogs.map(blog =>
+        filter.view.list ?
+        <Col key={`${blog.slug}-list`} md="9">
+          <CardListItem />
+        </Col>
+        :
+        <Col key={blog.slug} md="4">
+          <CardItem
+            author={blog.author}
+            title={blog.title}
+            subtitle={blog.subtitle}
+            date={blog.date}
+            image={blog.coverImage}
+            link={{
+              href: '/blogs/[slug]',
+              as: `/blogs/${blog.slug}`
+            }}
+          />
+        </Col>
+      )
+    }
+  </Row>
   </PageLayout>
   )
 }
