@@ -10,17 +10,13 @@ import { useState } from 'react';
 import FilteringMenu from 'components/FilteringMenu';
 
 
-export default function Home({blogs}) {  
+export default function Home({blogs: initalData}) {  
   const [filter, setFilter] = useState({
     view: { list: 0 }
   });
 
   
-  const { data, error } = useGetBlogs();
-  if (data){
-    alert(JSON.stringify(data))
-  }
-
+  const { data: blogs, error } = useGetBlogs(initalData);
 
   return (
     <PageLayout>
@@ -33,10 +29,7 @@ export default function Home({blogs}) {
         }}
       />
       <hr/>
-      <Row className="mb-5">
-        {/* <Col md="10">
-          <CardListItem />
-        </Col> */}
+      <Row className="mb-5">       
         { blogs.map(blog =>
         filter.view.list ?
         <Col key={`${blog.slug}-list`} md="9">
@@ -73,7 +66,7 @@ export default function Home({blogs}) {
 }
 
 export async function getStaticProps() { 
-  const blogs = await getAllBlogs();
+  const blogs = await getAllBlogs({offset: 0});
   return {
     props: {
       blogs
