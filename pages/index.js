@@ -1,5 +1,5 @@
 import { Container, Row, Col, Media, Image, Card } from 'react-bootstrap';
-import Navbar from '../components/Navbar';
+import Navbar from 'components/Navbar';
 
 
 
