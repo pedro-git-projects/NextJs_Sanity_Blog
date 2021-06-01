@@ -5,6 +5,8 @@ import ThemeProvider from 'providers/ThemeProvider';
 
 import { library, config } from '@fortawesome/fontawesome-svg-core';
 import {
+  faSun,
+  faMoon,
   faBorderAll,
   faList,
   faSortNumericDown,
@@ -12,9 +14,16 @@ import {
 
 
 config.autoAddCss = false;
-library.add(faList, faBorderAll, faSortNumericDown, faSortNumericUp);
+library.add(
+  faSun,
+  faMoon,
+  faList,
+  faBorderAll,
+  faSortNumericDown,
+  faSortNumericUp);
 
 import '@fortawesome/fontawesome-svg-core/styles.css';
+import "react-toggle/style.css"
 
 export default ({Component, pageProps}) =>
   <ThemeProvider>
