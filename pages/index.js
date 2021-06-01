@@ -19,6 +19,7 @@ export default function Home({blogs}) {
       </Col>
       {blogs.map(blog => <Col md="4">
         <CardItem 
+        author={blog.author}
          title={blog.title}
          subtitle={blog.subtitle}
          date={blog.date}
