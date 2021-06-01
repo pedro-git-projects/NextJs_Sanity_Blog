@@ -9,11 +9,10 @@ export const useGetBlogsPages = ({blogs: initialData, filter}) => {
   return useSWRPages(
     'index-page',
     ({offset, withSWR}) => {
-      const { data: blogs } =  withSWR(useGetBlogs(initialData));
-
+        const { data: blogs } =  withSWR(useGetBlogs({offset}));
       if (!blogs) { return 'Loading...'}
-
       return blogs
+
         .map(blog =>
         filter.view.list ?
           <Col key={`${blog.slug}-list`} md="9">
@@ -46,7 +45,8 @@ export const useGetBlogsPages = ({blogs: initialData, filter}) => {
     },
     
     (SWR, index) => {
-      return 0;
+         if (SWR.data && SWR.data.length === 0) { return null; }
+      return (index + 1) * 3;
     },
     [filter]
   )
