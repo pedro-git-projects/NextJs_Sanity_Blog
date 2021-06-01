@@ -1,0 +1,53 @@
+import { useSWRPages } from 'swr';
+import { useGetBlogs } from 'actions';
+import { Col } from 'react-bootstrap';
+import CardItem from 'components/CardItem';
+import CardListItem from 'components/CardListItem';
+
+export const useGetBlogsPages = ({blogs: initialData, filter}) => {
+
+  return useSWRPages(
+    'index-page',
+    ({offset, withSWR}) => {
+      const { data: blogs } =  withSWR(useGetBlogs(initialData));
+
+      if (!blogs) { return 'Loading...'}
+
+      return blogs
+        .map(blog =>
+        filter.view.list ?
+          <Col key={`${blog.slug}-list`} md="9">
+            <CardListItem
+              author={blog.author}
+              title={blog.title}
+              subtitle={blog.subtitle}
+              date={blog.date}
+              link={{
+                href: '/blogs/[slug]',
+                as: `/blogs/${blog.slug}`
+              }}
+            />
+          </Col>
+          :
+          <Col key={blog.slug} md="4">
+            <CardItem
+              author={blog.author}
+              title={blog.title}
+              subtitle={blog.subtitle}
+              date={blog.date}
+              image={blog.coverImage}
+              link={{
+                href: '/blogs/[slug]',
+                as: `/blogs/${blog.slug}`
+              }}
+            />
+          </Col>
+        )
+    },
+    
+    (SWR, index) => {
+      return 0;
+    },
+    [filter]
+  )
+}
