@@ -11,7 +11,7 @@ const BlogNavbar = ({theme, toggleTheme}) => {
       expand="lg" >
       <Navbar.Brand className="fj-navbar-brand">
       <Link href="/">
-          <a style={{color: theme.fontColor}}>Lambda Abstraction</a>
+          <a style={{color: theme.fontColor}}>Abstração Lambda</a>
         </Link>
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -22,7 +22,7 @@ const BlogNavbar = ({theme, toggleTheme}) => {
           <Nav.Link
             as={() =>
               <Link href='/'>
-                <a className="fj-navbar-item fj-navbar-link">Home</a>
+                <a className="fj-navbar-item fj-navbar-link">Início</a>
               </Link>
             }
           />         

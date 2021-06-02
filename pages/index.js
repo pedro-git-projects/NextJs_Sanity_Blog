@@ -43,7 +43,7 @@ export default function Home({blogs, preview}) {
           disabled={isReachingEnd || isLoadingMore}
           size="lg"
           variant="outline-secondary">
-          {isLoadingMore ? '...' : isReachingEnd ? 'No more blogs' : 'More Blogs'}
+          {isLoadingMore ? '...' : isReachingEnd ? 'Fim' : 'Mais Blogs'}
         </Button>
       </div>
   </PageLayout>
@@ -55,6 +55,7 @@ export async function getStaticProps({preview = false}) {
   return {
     props: {
       blogs, preview
-    }
+    },
+    revalidate: 1
   }
 }
