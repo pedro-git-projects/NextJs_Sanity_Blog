@@ -7,16 +7,16 @@ import { Row, Col } from 'react-bootstrap'
 import BlogContent from 'components/BlogContent';
 import { urlFor } from 'lib/api';
 import moment from 'moment';
+import PreviewAlert from 'components/PreviewAlert';
 
-const BlogDetail = ({blog}) => {
+const BlogDetail = ({blog, preview}) => {
   const router = useRouter();
 
   if (!router.isFallback && !blog?.slug) {
     return <ErrorPage statusCode="404"/>
   }
 
-  if (router.isFallback) {
-    console.log('Loading fallback page')
+  if (router.isFallback) {    
     return (
       <PageLayout className="blog-detail-page">
         Loading...
@@ -27,6 +27,7 @@ const BlogDetail = ({blog}) => {
     <PageLayout className="blog-detail-page">
     <Row>
       <Col md={{ span: 10, offset: 1 }}>
+      { preview && <PreviewAlert /> }
         <BlogHeader
           title={blog.title}
           subtitle={blog.subtitle}
@@ -44,10 +45,10 @@ const BlogDetail = ({blog}) => {
   )
 }
 
-export async function getStaticProps({params}) {
-    const blog = await getBlogBySlug(params.slug);
+export async function getStaticProps({params, preview = false, previewData}) {
+  const blog = await getBlogBySlug(params.slug, preview);
     return {
-      props: {blog}
+      props: { blog, preview }
     }
   } 
   
